@@ -1,0 +1,23 @@
+ENGLISH: In console-color you can put this list of colors:
+
+Red
+Green
+Yellow
+Blue
+Magenta
+Cyan
+
+NOTE: IT DOESN'T MATTER IF YOU PUT IT IN LOWERCASE OR IN UPPERCASE.
+
+ESPAÑOL: En console-color puedes poner esta lista de colores:
+
+Formato: Ingles / Español
+
+Red / Rojo
+Green / Verde
+Yellow / Amarillo
+Blue / Azul
+Magenta / Fucsia
+Cyan / Cian
+
+NOTA: SIEMPRE PONERLO EN INGLES Y NO IMPORTA SI LO PONES EN MINUSCULAS O EN MAYÚSCULAS.
