@@ -15,7 +15,7 @@ ctypes.windll.kernel32.SetConsoleTitleW("Discord Webhook Sender | Made by github
 
 
 #Set variables and get config data/Asignar variables y obtener datos de configuracion
-with open("config-example.json", "r") as f:
+with open("config.json", "r") as f:
   data = json.load(f)
 
 url = data["webhook"]
