@@ -1,20 +1,19 @@
-
-#DISCORD WEBHOOK SENDER, MADE BY Github.com/VictorrPY
-
-#Import modules (DONT DELETE ANYTHING)/Importa modulos (NO BORRAR NADA)
-from dhooks import Webhook
+from dhooks import Webhook, Embed
 import json
 from colorama import Fore, init
 import time
-import ctypes
 import sys
+import ctypes
+import requests
+
+
+ctypes.windll.kernel32.SetConsoleTitleW("Discord Webhook Sender v.1.1 | Made by github.com/VictorrPY")
 init()
 
-#Set console title/Asignar titulo a la consola
-ctypes.windll.kernel32.SetConsoleTitleW("Discord Webhook Sender | Made by github.com/VictorrPY")
+version = 1.1
 
-
-#Set variables and get config data/Asignar variables y obtener datos de configuracion
+with open("version.txt", "r") as g:
+   current_version = g.read()
 with open("config.json", "r") as f:
   data = json.load(f)
 
@@ -22,20 +21,28 @@ url = data["webhook"]
 color = data["console-color"].lower()
 name = data["username"]
 avatar = data["avatar"]
-exit = data["autoexit"]
+exit = data["autoexit"].lower()
+enable_embed = data["enable-embed"].lower()
+embed = data["embed"]
+embed_title = data["embed"]["title"]
+embed_description = data["embed"]["description"]
+embed_image = data["embed"]["image"]
+embed_thumbnail = data["embed"]["thumbnail"]
+embed_footer = data["embed"]["footer"]
 
-#Set console color/Asignar colores de consola
 if color == "blue":
   fore = Fore.BLUE
-if color == "red":
+elif color == "black":
+  fore = Fore.BLACK
+elif color == "red":
   fore = Fore.RED
-if color == "green":
+elif color == "green":
   fore = Fore.GREEN
-if color == "yellow":
+elif color == "yellow":
   fore = Fore.YELLOW
-if color == "magenta":
+elif color == "magenta":
   fore = Fore.MAGENTA
-if color == "cyan":
+elif color == "cyan" :
   fore = Fore.CYAN
 
 print(fore + '''
@@ -46,30 +53,77 @@ print(fore + '''
 ╚███╔███╔╝███████╗██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║  ██╗    ███████║███████╗██║ ╚████║██████╔╝███████╗██║  ██║
  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝\n''')
 
+download = 0
+if current_version != version:
+    pass
+else:
+    print("YOUR VERSION IS OUTDATED, WOULD YOU LIKE TO DOWNLOAD THE NEW VERSION??")
+    download = input("[1] Yes\n[2] No\nSelect your option: ")
+    while download not in ["1", "2"]:
+        downlaod = input("Please select a correct option: ")
+if download == "1":
+    print("Downloading new version...\n")
+    url = 'https://github.com/VictorrPY/Discord-Webhook-Sender/releases/download/v1.0/DiscordWebhookSender.rar'
+    r = requests.get(url, allow_redirects=True)
+    open(f'DiscordWebhookSender v{current_version}.rar', 'wb').write(r.content)
+else:
+    pass
 
 print(fore + "Welcome to Victor's Webhook Sender")
+print(fore + "[ANNOUNCEMENT] I ADDED EMBED MESSAGES, LOOK CONFIG.JSON TO CONFIGURE IT.\n")
 
 while True:
-  if exit == "True":
-      #Get some text for the Webhook to send/Capturar algo de texto para que el Webhook envie
-      text = input("Please write something for the Webhook to send: ")
-      #Set Webhook Url, Username and Avatar/Asignar Webhook Url, Nombre y Foto
-      wb = Webhook(url, username=name, avatar_url=avatar)
-      #Send the text/Enviar el texto
-      wb.send(text)
+  if enable_embed == "false":
+      if exit == "true":
 
-      print(fore + f"\nText sent successfully with Username: {name} and Text: {text}\n")
+        text = input("Please write something for the Webhook to send: ")
 
-      time.sleep(1)
-      #Close the console/Cierra la consola
-      sys.exit()
+        wb = Webhook(url, username=name, avatar_url=avatar)
+        wb.send(text)
+
+        print(fore + f"\nText sent successfully with username: {name} and text: {text}\n")
+        time.sleep(1)
+        sys.exit()
+
+      elif exit == "false":
+         text = input("Please write something for the Webhook to send: ")
+
+         wb = Webhook(url, username=name, avatar_url=avatar)
+         wb.send(text)
+
+         print(fore + f"\nText sent successfully with username: {name} and text: {text}\n")
+         time.sleep(1)
   else:
-      #Get some text for the Webhook to send/Capturar algo de texto para que el Webhook envie
-      text = input("Please write something for the Webhook to send: ")
-      #Set Webhook Url, Username and Avatar/Asignar Webhook Url, Nombre y Foto
-      wb = Webhook(url, username=name, avatar_url=avatar)
-      #Send the text/Enviar el texto
-      wb.send(text)
-      print(fore + f"\nText sent successfully with Username: {name} and Text: {text}\n")
+      if exit == "true":
+        text = input( "Please write something for the Webhook to send: ")
 
-      time.sleep(1)
+        wb = Webhook(url, username=name, avatar_url=avatar)
+
+        embed = Embed(title=embed_title, description=embed_description)
+        embed.set_thumbnail(embed_thumbnail)
+        embed.set_footer(embed_footer)
+        embed.set_image(embed_image)
+
+        wb.send(embed=embed)
+        wb.send(text)
+
+        print(fore + f"\nText sent successfully with username: {name} and text: {text}\n")
+        time.sleep(1)
+        sys.exit()
+
+      elif exit == "false":
+        text = input("Please write something for the Webhook to send: ")
+
+        wb = Webhook(url, username=name, avatar_url=avatar)
+
+        embed = Embed(title=embed_title, description=embed_description)
+        embed.set_thumbnail(embed_thumbnail)
+        embed.set_footer(embed_footer)
+        embed.set_image(embed_image)
+
+        wb.send(embed=embed)
+        wb.send(text)
+
+        print(fore + f"\nText sent successfully with username: {name} and text: {text}\n")
+        time.sleep(1)
+
