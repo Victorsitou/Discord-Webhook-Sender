@@ -12,8 +12,7 @@ init()
 
 version = 1.1
 
-with open("version.txt", "r") as g:
-   current_version = g.read()
+current_version = str(get(url="https://raw.githubusercontent.com/VictorrPY/Discord-Webhook-Sender/master/version").text)
 with open("config.json", "r") as f:
   data = json.load(f)
 
