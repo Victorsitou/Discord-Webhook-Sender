@@ -1,7 +1,16 @@
 {
-  "webhook": "YOUR WEBHOOK URL/EL URL DE TU WEBHOOKS",
-  "avatar": "URL WITH A PICTURE/URL CON UNA FOTO",
-  "username": "PUT HERE WHATEVER YOU WANT/PON ACA LO QUE QUIERAS",
+  "webhook": "YOUR WEBHOOK URL",
+  "avatar": "URL WITH A PICTURE",
+  "username": "PUT HERE WHATEVER YOU WANT",
   "console-color": "PUT HERE A COLOR (LOOK COLORS.TXT FOR HELP)",
-  "autoexit":  "True or False"
+  "autoexit": "True or False",
+  "enable-embed": "True or False",
+  "embed": {
+    "commentary": "IT DOESN'T MATTER IF YOU LEAVE A OPTION IN BLANK."
+    "title": "PUT HERE THE TITLE TEXT OF THE EMBED",
+    "description": "PUT HERE THE DESCRIPTION TEXT OF THE EMBED",
+    "image": "URL WITH A PICTURE",
+    "thumbnail": "URL WITH A PICTURE",
+    "footer": "PUT HERE THE FOOTER TEXT OF THE EMBED"
+  }
 }
