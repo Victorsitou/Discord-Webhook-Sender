@@ -5,14 +5,15 @@ import time
 import sys
 import ctypes
 import requests
+from requests import get
 
 
 ctypes.windll.kernel32.SetConsoleTitleW("Discord Webhook Sender v.1.1 | Made by github.com/VictorrPY")
 init()
 
-version = 1.1
+version = str(1.1)
+current_version = str(get(url="https://pastebin.com/raw/rkyrGt8V").text)
 
-current_version = str(get(url="https://raw.githubusercontent.com/VictorrPY/Discord-Webhook-Sender/master/version").text)
 with open("config.json", "r") as f:
   data = json.load(f)
 
@@ -54,15 +55,15 @@ print(fore + '''
 
 download = 0
 if current_version != version:
-    pass
-else:
     print("YOUR VERSION IS OUTDATED, WOULD YOU LIKE TO DOWNLOAD THE NEW VERSION??")
     download = input("[1] Yes\n[2] No\nSelect your option: ")
     while download not in ["1", "2"]:
         downlaod = input("Please select a correct option: ")
+else:
+    pass
 if download == "1":
     print("Downloading new version...\n")
-    url = 'https://github.com/VictorrPY/Discord-Webhook-Sender/releases/download/v1.0/DiscordWebhookSender.rar'
+    url = f'https://github.com/VictorrPY/Discord-Webhook-Sender/releases/download/v{current_version}/DiscordWebhookSender.rar'
     r = requests.get(url, allow_redirects=True)
     open(f'DiscordWebhookSender v{current_version}.rar', 'wb').write(r.content)
 else:
