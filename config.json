@@ -6,7 +6,7 @@
   "autoexit": "True or False",
   "enable-embed": "True or False",
   "embed": {
-    "commentary": "IT DOESN'T MATTER IF YOU LEAVE A OPTION IN BLANK."
+    "commentary": "IT DOESN'T MATTER IF YOU LEAVE A OPTION IN BLANK.",
     "title": "PUT HERE THE TITLE TEXT OF THE EMBED",
     "description": "PUT HERE THE DESCRIPTION TEXT OF THE EMBED",
     "image": "URL WITH A PICTURE",
