@@ -46,12 +46,12 @@ print(fore + '''
 
 download = 0
 if current_version != version:
-    pass
-else:
     print("YOUR VERSION IS OUTDATED, WOULD YOU LIKE TO DOWNLOAD THE NEW VERSION?")
     download = input("[1] Yes\n[2] No\nSelect your option: ")
     while download not in ["1", "2"]:
         downlaod = input("Please select a correct option: ")
+else:
+    pass
 if download == "1":
     print("Downloading new version...\n")
     url = f'https://github.com/VictorrPY/Discord-Webhook-Sender/releases/download/v{current_version}/DiscordWebhookSender.zip'
