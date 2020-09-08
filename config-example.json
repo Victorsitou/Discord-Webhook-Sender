@@ -1,21 +1,6 @@
 {
-  "webhook": "https://discordapp.com/api/webhooks/740758540238454794/7kl9ODXc-PPD2V2BVfZZnWRukskl58JBAIAKwe903of93dKIFkJtMx1Of22FX8pjP4Gx",
-
+  "webhook": "https://discord.com/api/webhooks/740758540238454794/7kl9ODXc-PPD2V2BVfZZnWRukskl58JBAIAKwe903of93dKIFkJtMx1Of22FX8pjP4Gg",
   "console-color": "red",
-
   "username": "victorr",
-
-  "avatar": "https://avatars2.githubusercontent.com/u/67214928?s=400&u=5207ea9c0257bbaad22c7a70e03f7928626507d3&v=4",
-
-  "autoexit": "False",
-
-  "enable-embed": "True",
-
-  "embed": {
-    "title": "Verify system.",
-    "description": "React with the emoji to verify yourself.",
-    "image": "https://avatars2.githubusercontent.com/u/67214928?s=460&u=5207ea9c0257bbaad22c7a70e03f7928626507d3&v=4",
-    "thumbnail": "",
-    "footer": "Made by victorr#0001"
-  }
+  "avatar": "https://avatars2.githubusercontent.com/u/67214928?s=400&u=5207ea9c0257bbaad22c7a70e03f7928626507d3&v=4"
 }
