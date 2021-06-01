@@ -54,7 +54,7 @@ else:
     pass
 if download == "1":
     print("Downloading new version...\n")
-    url = f'https://github.com/VictorrPY/Discord-Webhook-Sender/releases/download/v{current_version}/DiscordWebhookSender.zip'
+    url = f'https://github.com/Victorsitou/Discord-Webhook-Sender/releases/download/v{current_version}/DiscordWebhookSender.zip'
     r = requests.get(url, allow_redirects=True)
     open(f'DiscordWebhookSender v{current_version}.zip', 'wb').write(r.content)
     
