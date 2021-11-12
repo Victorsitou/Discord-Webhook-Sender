@@ -6,5 +6,3 @@ If you want to download and use it, you can do it [here.](https://github.com/Vic
 If you need help just create an [Issue.](https://github.com/VictorrPY/Discord-Webhook-Sender/issues/new)
 
 ![img](https://i.imgur.com/Hbkfgk3.png)
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Victorsitou&show_icons=true&theme=tokyonight)
