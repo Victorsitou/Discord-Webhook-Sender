@@ -1,4 +1,7 @@
 # Discord Webhook Sender
+
+**I'M GOING TO REWRITE THIS**
+
 This is a simple Discord Webhook Sender, feel free to use it!
 
 If you want to download and use it, you can do it [here.](https://github.com/VictorrPY/Discord-Webhook-Sender/releases/tag/v1.2)
