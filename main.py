@@ -1,135 +1,176 @@
-from dhooks import Webhook, Embed
-import json
-from colorama import Fore, init
-import time
-import sys
-import ctypes
-import requests
-from requests import get
+import ctypes, requests, json, time, json
+from re import I
+from disnake import SyncWebhook, Embed, File
+from colorama import init
 
-ctypes.windll.kernel32.SetConsoleTitleW("Discord Webhook Sender v1.2 | Made by github.com/VictorrPY")
-init()
+from typing import List, Any
+from colorama.ansi import AnsiFore
+from requests.api import delete
+from requests.models import Response
 
-version = str(1.2)
-current_version = str(get(url="https://pastebin.com/raw/rkyrGt8V").text)
+from utils.utils import convert_color, delete_lines, are_fields_empty, is_url, split
 
-with open("config.json", "r") as f:
-  data = json.load(f)
+releases_data: Response = requests.get(
+    url="https://api.github.com/repos/Victorsitou/Discord-Webhook-Sender/releases"
+)
 
-url = data["webhook"]
-color = data["console-color"].lower()
-name = data["username"]
-avatar = data["avatar"]
+version: str = "v2.0"
+current_version: str = releases_data.json()[0]["tag_name"]
 
-if color == "blue":
-  fore = Fore.BLUE
-elif color == "black":
-  fore = Fore.BLACK
-elif color == "red":
-  fore = Fore.RED
-elif color == "green":
-  fore = Fore.GREEN
-elif color == "yellow":
-  fore = Fore.YELLOW
-elif color == "magenta":
-  fore = Fore.MAGENTA
-elif color == "cyan" :
-  fore = Fore.CYAN
+ctypes.windll.kernel32.SetConsoleTitleW(
+    f"Discord Webhook Sender v{version} | Made by github.com/Victorsitou"
+)
+init(autoreset=True)
 
-print(fore + '''
+with open("config.json") as f:
+    data: list[str] = json.load(f)
+
+url: str = data["webhook"]
+color: str = data["console-color"]
+username: str = data["username"]
+avatar_url: str = data["avatar_url"]
+wb: SyncWebhook = SyncWebhook.from_url(url=url)
+
+fore: AnsiFore = convert_color(color)
+
+print(
+    f"""{fore}
 ██╗    ██╗███████╗██████╗ ██╗  ██╗ ██████╗  ██████╗ ██╗  ██╗    ███████╗███████╗███╗   ██╗██████╗ ███████╗██████╗ 
 ██║    ██║██╔════╝██╔══██╗██║  ██║██╔═══██╗██╔═══██╗██║ ██╔╝    ██╔════╝██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗
 ██║ █╗ ██║█████╗  ██████╔╝███████║██║   ██║██║   ██║█████╔╝     ███████╗█████╗  ██╔██╗ ██║██║  ██║█████╗  ██████╔╝
 ██║███╗██║██╔══╝  ██╔══██╗██╔══██║██║   ██║██║   ██║██╔═██╗     ╚════██║██╔══╝  ██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗
 ╚███╔███╔╝███████╗██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║  ██╗    ███████║███████╗██║ ╚████║██████╔╝███████╗██║  ██║
- ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝\n''')
+ ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝\n"""
+)
 
-download = 0
 if current_version != version:
-    print("YOUR VERSION IS OUTDATED, WOULD YOU LIKE TO DOWNLOAD THE NEW VERSION?")
-    download = input("[1] Yes\n[2] No\nSelect your option: ")
-    while download not in ["1", "2"]:
-        downlaod = input("Please select a correct option: ")
-else:
-    pass
-if download == "1":
-    print("Downloading new version...\n")
-    url = f'https://github.com/Victorsitou/Discord-Webhook-Sender/releases/download/v{current_version}/DiscordWebhookSender.zip'
-    r = requests.get(url, allow_redirects=True)
-    open(f'DiscordWebhookSender v{current_version}.zip', 'wb').write(r.content)
-    
-else:
-    pass
-print(fore + "\nWelcome to Victor's Webhook Sender")
+    print(
+        f"{fore}Your version is outdated, please consider downloading the new version from the GitHub repository.\nhttps://github.com/Victorsitou/Discord-Webhook-Sender\n"
+    )
+
+print(
+    f"Welcome to Victorsitou's Discord webhook sender.\n\n[1] Text\n[2] Embed\n[3] Text and Embed"
+)
 
 while True:
-    option = input("[1] Text\n[2] Embed\n[3] Text and Embed\nPlease select an option: ")
+
+    option: str = input(f"{fore}Please select the option you want to use: ")
+
     while option not in ["1", "2", "3"]:
-        option = input("Please select an correct option: ")
+        delete_lines(1)
+        option: str = input(f"{fore}Please select a correct option: ")
 
     if option == "1":
 
-        text = input("\nPlease write something for the Webhook to send: ")
+        text: str = input(f"{fore}\nPlease write something for the webhook to send: ")
 
-        wb = Webhook(url, username=name, avatar_url=avatar)
+        wb.send(content=split(text), username=username, avatar_url=avatar_url)
 
-        wb.send(text)
-
-        print(fore + f"\nText sent successfully with Username: {name} and text: {text}\n")
-
-        time.sleep(0.5)
+        print(f"\n{fore}Message sent successfully.")
+        time.sleep(1)
+        delete_lines(5)
 
     elif option == "2":
-         print("\nIT DOESN'T MATTER IF YOU LEAVE AN EMPTY OPTION.")
-         time.sleep(0.5)
-         title = input("Select a Title text for the embed: ")
-         description = input("Select a Description text for the embed: ")
-         image = input("Select an Image for the embed (IT NEED TO BE AN URL WITH AN IMAGE): ")
-         thumbnail = input("Select an Thumbnail for the embed (IT NEED TO BE AN URL WITH AN IMAGE): ")
-         footer = input("Select an Footer text for the embed: ")
 
-         wb = Webhook(url, username=name, avatar_url=avatar)
+        title: str = input("\nWrite a title for the embed: ")
+        description: str = input("Write a description for the embed: ")
+        image: str = input(
+            "Write an image url for the embed image: (You could also use a local file) "
+        )
+        thumbnail: str = input(
+            "Write an image url for the embed thumbnail: (You could also use a local file) "
+        )
+        footer: str = input("Write a footer for the embed: ")
 
-         embed = Embed(title=title, description=description)
-         embed.set_image(image)
-         embed.set_thumbnail(thumbnail)
-         embed.set_footer(text=footer)
+        are_fields_empty([title, description, image, thumbnail, footer])
 
-         wb.send(embed=embed)
+        embed: Embed = Embed(
+            title=split(title),
+            description=split(description),
+        )
 
-         print(fore + f"\nEmbed sent successfully with Username: {name}\n")
-
-         time.sleep(0.5)
-    elif option == "3":
-        text = input("\nPlease write something for the Webhook to send: ")
-        time.sleep(0.5)
-        print("\nIT DOESN'T MATTER IF YOU LEAVE AN EMPTY OPTION.")
-        time.sleep(0.5)
-        title = input("Select a Title text for the embed: ")
-        description = input("Select a Description text for the embed: ")
-        image = input("Select an Image for the embed (IT NEED TO BE AN URL WITH AN IMAGE): ")
-        thumbnail = input("Select an Thumbnail for the embed (IT NEED TO BE AN URL WITH AN IMAGE): ")
-        footer = input("Select an Footer text for the embed: ")
-
-        wb = Webhook(url, username=name, avatar_url=avatar)
-
-        embed = Embed(title=title, description=description)
-        embed.set_image(image)
-        embed.set_thumbnail(thumbnail)
-        embed.set_footer(text=footer)
+        is_image_url: List[Any] = is_url(image)
+        is_thumbnail_url: List[Any] = is_url(thumbnail)
+        files: List[File] = []
 
         try:
-            wb.send(text)
-            wb.send(embed=embed)
-        except ValueError:
-            try:
-                wb.send(text)
-            except:
-                pass
-        if text == "":
+            if is_image_url[0]:
+                embed.set_image(url=image)
+            else:
+                embed.set_image(file=is_image_url[1])
+                files.append(is_image_url[1])
+        except:
             pass
-        else:
-            print(fore + f"Text and Embed sent successfully with Username: {name} and Text: {text}\n")
-        time.sleep(0.5)
 
+        try:
+            if is_thumbnail_url[0]:
+                embed.set_thumbnail(url=thumbnail)
+            else:
+                embed.set_thumbnail(file=is_thumbnail_url[1])
+                files.append(is_thumbnail_url[1])
+        except:
+            pass
 
+        embed.set_footer(text=split(footer))
+
+        wb.send(embed=embed, files=files, username=username, avatar_url=avatar_url)
+        print(f"\nEmbed sent successfully.")
+        time.sleep(1)
+        delete_lines(9)
+
+    if option == "3":
+
+        text: str = input(f"{fore}\nPlease write something for the webhook to send: ")
+
+        title: str = input("\nWrite a title for the embed: ")
+        description: str = input("Write a description for the embed: ")
+        image: str = input(
+            "Write an image url for the embed image: (You could also use a local file) "
+        )
+        thumbnail: str = input(
+            "Write an image url for the embed thumbnail: (You could also use a local file) "
+        )
+        footer: str = input("Write a footer for the embed: ")
+
+        are_fields_empty([title, description, image, thumbnail, footer])
+
+        embed: Embed = Embed(
+            title=split(title),
+            description=split(description),
+        )
+
+        is_image_url: List[Any] = is_url(image)
+        is_thumbnail_url: List[Any] = is_url(thumbnail)
+        files: List[File] = []
+
+        try:
+            if is_image_url[0]:
+                embed.set_image(url=image)
+            else:
+                embed.set_image(file=is_image_url[1])
+                files.append(is_image_url[1])
+        except:
+            pass
+
+        try:
+            if is_thumbnail_url[0]:
+                embed.set_thumbnail(url=thumbnail)
+            else:
+                embed.set_thumbnail(file=is_thumbnail_url[1])
+                files.append(is_thumbnail_url[1])
+        except:
+            pass
+
+        embed.set_footer(text=split(footer))
+
+        wb.send(
+            content=split(text),
+            embed=embed,
+            files=files,
+            username=username,
+            avatar_url=avatar_url,
+        )
+
+        print(f"\nText and embed sent successfully.")
+        time.sleep(1)
+        delete_lines(11)

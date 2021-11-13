@@ -1,0 +1,4 @@
+disnake==2.2.1
+requests==2.26.0
+colorama==0.4.4
+validators==0.18.2

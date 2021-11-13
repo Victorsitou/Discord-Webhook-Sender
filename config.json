@@ -1,6 +1,6 @@
 {
   "webhook": "YOUR WEBHOOK URL",
-  "avatar": "URL WITH A PICTURE",
-  "username": "PUT HERE WHATEVER YOU WANT",
-  "console-color": "PUT HERE A COLOR (LOOK COLORS.TXT FOR HELP)"
+  "avatar_url": "URL WITH AN IMAGE",
+  "username": "WHATEVER YOU WANT",
+  "console-color": "VALID COLOR"
 }

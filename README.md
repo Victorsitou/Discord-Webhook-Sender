@@ -1,11 +1,21 @@
+![img](https://i.imgur.com/Hbkfgk3.png)
+
 # Discord Webhook Sender
 
-**I'M GOING TO REWRITE THIS**
+Features:
 
-This is a simple Discord Webhook Sender, feel free to use it!
+* Multi-line support.
+* Support for URL and local images.
+* Easy-to-use.
 
-If you want to download and use it, you can do it [here.](https://github.com/VictorrPY/Discord-Webhook-Sender/releases/tag/v1.2)
+Issues:
+-------
 
-If you need help just create an [Issue.](https://github.com/VictorrPY/Discord-Webhook-Sender/issues/new)
+If you got any errors, or you need help with something, try submitting an [issue](https://github.com/Victorsitou/Discord-Webhook-Sender/issues) or contact me on [Discord](https://discord.com/users/184040656761651200).
 
-![img](https://i.imgur.com/Hbkfgk3.png)
+Contributing:
+-------------
+
+If you want to contribute, submit a pull-request [here](https://github.com/Victorsitou/Discord-Webhook-Sender/pulls). 
+
+I will apreciate it!
