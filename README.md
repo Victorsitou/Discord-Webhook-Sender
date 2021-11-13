@@ -1,5 +1,3 @@
-![img](https://i.imgur.com/Hbkfgk3.png)
-
 # Discord Webhook Sender
 
 Features:
