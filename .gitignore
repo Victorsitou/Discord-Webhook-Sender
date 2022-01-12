@@ -147,3 +147,5 @@ correct_path.txt
 *.gif
 *.webp
 *.ico
+images/
+pyqt/
